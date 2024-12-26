@@ -9,31 +9,21 @@ $scaleTime = '24s';
 $opacityTime = '4s';
 // how much each slide zooms in
 $scaleAmount = '1.024';
-// set perpage to the total number of images in folder for slideshow because using $total_files in the js doesn't seem to work, get js errors in console doing that
-$perpage = 511;
-// Set default value for $page
-$page = 1;
-if (isset($_GET['page'])) {
-	$page = (int) $_GET['page'];
-}
-if (!($page > 0)) {
-	$page = 1;
-}
-$offset = ($page - 1) * $perpage;
+// allowed file extensions
 $extensions = array('png', 'jpg', 'jpeg');
 // Check if 'dir' is set in the URL; use the current directory if not
 $directory = isset($_GET['dir']) ? rtrim($_GET['dir'], '/') . '/' : __DIR__ . '/';
 // Get files from the directory
 $files = glob($directory . '*.' . '{' . implode(',', $extensions) . '}', GLOB_BRACE);
-//
-$total_files = sizeof($files);
-$total_pages = ceil($total_files / $perpage);
-$files = array_slice($files, $offset, $perpage);
+// Total number of files found
+$total_files = count($files);
+// Initialize imgCounter for unique IDs
+$imgCounter = 0;
 ?>
 	<title><?php echo $pageTitle; ?></title>
 </head>
 <body>
-	<p class="cent"><?=($offset + $perpage)?> of <?=$total_files?> files loaded. <button>F for Fullscreen</button></p>
+	<p class="cent"><?= $total_files ?> files loaded. <button>F for Fullscreen</button></p>
 	<div id="slideshow" class="slideshow">
 		<figure class="image">
 				<?php
@@ -50,7 +40,7 @@ $files = array_slice($files, $offset, $perpage);
 								$aspectClass = 'square';
 						}
 				?>
-						<img id="img<?=($offset++)?>" src='<?= basename($file) ?>' alt='<?= basename($file) ?>' class="<?= $aspectClass ?>" />
+						<img id="img<?=($imgCounter++)?>" src='<?= basename($file) ?>' alt='<?= basename($file) ?>' class="<?= $aspectClass ?>" />
 				<?php endforeach; ?>
 		</figure>
 
