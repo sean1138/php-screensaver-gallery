@@ -35,7 +35,7 @@ $total_pages = ceil($total_files / $perpage);
 $files = array_slice($files, $offset, $perpage);
 ?>
 
-	<p class="cent"><?=($offset + $perpage)?> of <?=$total_files?> files loaded. <br><button>F for Fullscreen</button></p>
+	<p class="cent"><?=($offset + $perpage)?> of <?=$total_files?> files loaded. <br><button>Fullscreen</button></p>
 		<div id="slideshow" class="slideshow">
 			<figure class="image">
 					<?php
