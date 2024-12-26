@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "AI Thots 2023.04.16";
+$pageTitle = "SLIDESHOW";
 
 // duration each slide shows in seconds
 $slideTime = '8';
@@ -25,25 +25,24 @@ $imgCounter = 0;
 <body>
 	<p class="cent"><?= $total_files ?> files loaded. <button>F for Fullscreen</button></p>
 	<div id="slideshow" class="slideshow">
-		<figure class="image">
-				<?php
-				shuffle($files);
-				foreach ($files as $file):
-						// Get the dimensions of the image
-						list($width, $height) = getimagesize($file);
-						// Determine the aspect ratio
-						if ($width > $height) {
-								$aspectClass = 'landscape';
-						} elseif ($width < $height) {
-								$aspectClass = 'portrait';
-						} else {
-								$aspectClass = 'square';
-						}
-				?>
-						<img id="img<?=($imgCounter++)?>" src='<?= basename($file) ?>' alt='<?= basename($file) ?>' class="<?= $aspectClass ?>" />
-				<?php endforeach; ?>
+		<?php
+		shuffle($files);
+		foreach ($files as $file):
+			// Get the dimensions of the image
+			list($width, $height) = getimagesize($file);
+			// Determine the aspect ratio
+			if ($width > $height) {
+					$aspectClass = 'landscape';
+			} elseif ($width < $height) {
+					$aspectClass = 'portrait';
+			} else {
+					$aspectClass = 'square';
+			}
+		?>
+		<figure id="img<?=($imgCounter++)?>">
+			<img src='<?= basename($file) ?>' alt='<?= basename($file) ?>' class="<?= $aspectClass ?>" />
 		</figure>
-
+		<?php endforeach; ?>
 	</div>
 	<script defer>
 		// fullscreen button/mode
@@ -78,12 +77,12 @@ $imgCounter = 0;
 		 */
 		(function () {
 			// Set the 'visible' class on the first image when the page loads
-			document.getElementById('slideshow').getElementsByTagName('img')[0].classList.add("visible");
+			document.getElementById('slideshow').getElementsByTagName('figure')[0].classList.add("visible");
 			// Call the kenBurns function every X seconds
 			window.setInterval(kenBurns, <?=$slideTime?>000);
 			// Track the current image in the loop
 			// if it is set to 1 (instead of 0) it is because the first image is styled when the page loads
-			var images = document.getElementById('slideshow').getElementsByTagName('img'),
+			var images = document.getElementById('slideshow').getElementsByTagName('figure'),
 				numberOfImages = images.length,
 				i = 1;
 			function kenBurns() {
@@ -118,37 +117,37 @@ $imgCounter = 0;
 			margin:0;
 			min-height: 100vh;
 			background:black;
-			color:#333;
-		}
-		figure{
-			position: relative;
-			margin:0;
-			height: 90vh;
-			max-width: 100vw;
-			display: grid;
-			place-content: center;
-			align-items: center;
-			overflow: hidden;
+			color:#777;
 		}
 		.slideshow{
+			display:grid;
+			height: 90vh;
 			margin-top: auto;
+			overflow: hidden;
 		}
-		figure img{
+		.slideshow:fullscreen{cursor:none;}
+		.slideshow:fullscreen figure{height:100vh;}
+		.slideshow:fullscreen img{height:99vh;width:99vw;}
+		figure{
+			display:grid;
+			margin:0;
 			grid-column: 1;
 			grid-row: 1;
-			place-self: center;
-			object-fit: contain;
+			overflow: hidden;
 			transition-property: opacity, transform;
 			transition-duration: <?=$opacityTime?>, <?=$scaleTime?>;
 			transition-timing-function: ease-in-out, ease;
 			opacity:0;
-			height: 100%;
-/*			width: 100%;*/
-			height: fit-content;
-/*			width: fit-content;*/
-			max-height: 88cqh;
-			max-width: 88cqh;
-			border: 16px black solid;
+			background:black;
+		}
+		figure img{
+			display:block;
+			margin:0;
+			place-self:center;
+			object-fit:contain;
+			height:auto;
+			width:auto;
+			border-style: none;
 		}
 		figure img:nth-of-type(2n+1){transform-origin:top;}
 		figure img:nth-of-type(3n+1){transform-origin:top right;}
@@ -159,23 +158,21 @@ $imgCounter = 0;
 		figure img:nth-of-type(8n+1){transform-origin:left;}
 		figure img:nth-of-type(9n+1){transform-origin:top left;}
 		img.portrait{
-/*			max-width: 94cqw;*/
+			height:100cqh;
 		}
 		img.landscape{
-			max-width: 100cqw;
+			width:100cqw;
+			max-width:calc(100cqw - (var(--gutter)*2));
+		}
+		img.square{
+			height:100cqh;
+			width:100cqw;
+			max-width:calc(100cqw - (calc(var(--gutter)*2)));
 		}
 		.visible{
 			transform: scale(<?=$scaleAmount?>);
 			opacity: 1;
 		}
-		.slideshow{
-			display: flex;
-			place-content: center;
-			justify-content: center;
-		}
-		.slideshow:fullscreen{cursor:none;}
-		.slideshow:fullscreen figure{height:100vh;}
-		.slideshow:fullscreen img{height:99vh;width:99vw;}
 		p.cent{
 			text-align: center;
 		}
