@@ -167,6 +167,7 @@ $imgCounter = 0;
 		.visible{
 			transform: scale(<?=$scaleAmount?>);
 			opacity: 1;
+			border:100vmax black solid
 		}
 		.slideshow{
 			display: flex;
