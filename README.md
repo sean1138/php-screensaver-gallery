@@ -1,12 +1,12 @@
 # php-screensaver-gallery
-made this sometime in 2022 to somewhat replicate/replace an ancient screensaver ("GPhotos.scr" probably from [Picasa]([url](https://en.wikipedia.org/wiki/Picasa))) i've used forever.
+i made this sometime in 2022 to somewhat replicate/replace an ancient screensaver ("GPhotos.scr" probably from [Picasa]([url](https://en.wikipedia.org/wiki/Picasa))) i've used forever.
 
 ## Features
 1. Automatically gets every image in the **same folder** as `slideshow.php` and builds the html for the slideshow.
 2. Images move a little bit in different directions.
 3. Configurable timings.
-4. Fullscreen mode button, of course.
-5. Detects landscape/portrait/square aspect ratios.
+4. Fullscreen mode via F keypress or click the 'fullscreen' text on page.
+5. Detects and compensates for landscape/portrait/square aspect ratios.
 
 ## issues
 1. ~~MUST set an aspect ratio PHP var (`$aspectRatio`) for all images because the slideshow javascript solution i found at the time relies on CSS `position:absolute;`.~~
