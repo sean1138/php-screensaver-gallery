@@ -132,7 +132,6 @@ $imgCounter = 0;
 		}
 		.slideshow{
 			margin-top: auto;
-/*			background: #333;*/
 		}
 		figure img{
 			grid-column: 1;
@@ -149,6 +148,7 @@ $imgCounter = 0;
 /*			width: fit-content;*/
 			max-height: 88cqh;
 			max-width: 88cqh;
+			border: 16px black solid;
 		}
 		figure img:nth-of-type(2n+1){transform-origin:top;}
 		figure img:nth-of-type(3n+1){transform-origin:top right;}
@@ -167,7 +167,6 @@ $imgCounter = 0;
 		.visible{
 			transform: scale(<?=$scaleAmount?>);
 			opacity: 1;
-			border:100vmax black solid
 		}
 		.slideshow{
 			display: flex;
