@@ -122,7 +122,7 @@ $imgCounter = 0;
 		.slideshow{
 			display:grid;
 			height: 90vh;
-			margin-top: auto;
+			margin: auto;
 			overflow: hidden;
 		}
 		.slideshow:fullscreen{cursor:none;}
