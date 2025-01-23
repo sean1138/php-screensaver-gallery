@@ -58,6 +58,12 @@ $imgCounter = 0;
 				toggleFullscreen();
 			}
 		});
+		// double click for fullscreen
+		const clickTarget = document.querySelector("body");
+
+		clickTarget.addEventListener("dblclick", (e) => {
+		  toggleFullscreen();
+		});
 		// Function to toggle fullscreen mode
 		function toggleFullscreen() {
 			if (!document.fullscreenElement) {
